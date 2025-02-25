@@ -26,6 +26,8 @@ public class Main extends Application {
         UtilsViews.parentContainer.setStyle("-fx-font: 14 arial;");
         UtilsViews.addView(getClass(), "Desktop", "/assets/layout_desktop.fxml");
         UtilsViews.addView(getClass(), "Mobile0", "/assets/layout_mobile_0.fxml");
+        UtilsViews.addView(getClass(), "Mobile1", "/assets/layout_mobile_list.fxml");
+        UtilsViews.addView(getClass(), "MobileInfo", "/assets/layout_mobile_info.fxml");
 
         Scene scene = new Scene(UtilsViews.parentContainer);
         
@@ -53,7 +55,7 @@ public class Main extends Application {
     }
 
     private void _setLayout(int width) {
-        if (width < 600) {
+        if (width < 500) {
             UtilsViews.setView("Mobile0");
         } else {
             UtilsViews.setView("Desktop");

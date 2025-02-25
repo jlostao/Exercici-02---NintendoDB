@@ -1,32 +1,55 @@
 package com.project;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.input.MouseEvent;
 
-public class ControllerMobile0{
-    
-    public void switchToList() throws Exception {
+public class ControllerMobile0 {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("layout_mobile_list.fxml"));
-        Parent itemTemplate = loader.load();
-        
-        Scene scene = new Scene(itemTemplate);
-        
-        itemTemplate.setOnMouseClicked(event -> {
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-        });
+    @FXML
+    private VBox categoryPane;
 
+    @FXML
+    private Button btnPersonatges;
+
+    @FXML
+    private Button btnJocs;
+
+    @FXML
+    private Button btnConsoles;
+
+    @FXML
+    public void initialize() {
+        btnPersonatges.setOnAction(event -> showList("Personatges"));
+        btnJocs.setOnAction(event -> showList("Jocs"));
+        btnConsoles.setOnAction(event -> showList("Consoles"));
     }
-    
-    
+
+    @FXML
+    private void toPersonatgesList() {
+        showList("Personatges");
+    }
+
+    @FXML
+    private void toJocsList() {
+        showList("Jocs");
+    }
+
+    @FXML
+    private void toConsolesList() {
+        showList("Consoles");
+    }
+
+    private void showList(String category) {
+        AppData appData = AppData.getInstance();
+        appData.load(category, (result) -> {
+            if (result == null) {
+                System.out.println("ControllerMobile0: Error loading data.");
+            } else {
+                UtilsViews.setView("Mobile1");
+                ControllerMobile1 controller = (ControllerMobile1) UtilsViews.getController("Mobile1");
+                controller.loadList(category);
+            }
+        });
+    }
 }

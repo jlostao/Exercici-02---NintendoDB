@@ -42,12 +42,8 @@ public class ControllerInfoItem {
   @FXML
   private Label descripcio = new Label();
 
-  public void setImage(String resourceName) {
-
-    ClassLoader classLoader = getClass().getClassLoader();
-    Image image = new Image(classLoader.getResourceAsStream(resourceName));
-
-    img.setImage(image);
+  public void setImage(Image image) {
+    this.img.setImage(image);
   }
 
   public void setNom(String text) {
